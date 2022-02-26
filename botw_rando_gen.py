@@ -1,4 +1,5 @@
-# import random for choices
+import random
+from pprint import pprint
 
 bow_sets = ["Boko",
             "Lizalfos",
@@ -69,10 +70,11 @@ Armor: {armor}
 2: {objective2}
                   """
 
-def generate_randomizer_seed():
+def generate_randomizer_seed(n=2):
     """
+    Takes an integer, n, for number of objectives
     Uses globals/imports to get sets of bows, shields, weapons, armor, and
-    objectives. Returns a dict of 1 of bow, shield, weapons, armor, and 2 of
+    objectives. Returns a dict of 1 of bow, shield, weapons, armor, and n
     objectives.
     """
     seed = {}
@@ -83,10 +85,17 @@ def generate_randomizer_seed():
     global armor_sets
     global objectives
     
-    
+    seed["weapon"] = random.choice(weapon_sets)
+    seed["bow"] = random.choice(bow_sets)
+    seed["shield"] = random.choice(shield_sets)
+    seed["armor"] = random.choice(armor_sets)
+    choices = random.choices(objectives, k=n)
+    for i, choice in enumerate(choices):
+        j = i + 1
+        seed[f"objective{j}"] = choice
     return seed
 
-def write_to_file(seed={}, filename="botw_rando_gen.txt"):
+def write_to_file(seed={}, *, filename=None, display_only=False):
     """
     Takes a dict (from generate_randomizer_seed),
     Writes out to a file (UTF-8 encoding). Optionally, provide
@@ -101,6 +110,11 @@ def write_to_file(seed={}, filename="botw_rando_gen.txt"):
         objective1 = seed["objective1"],
         objective2 = seed["objective2"],
         )
+    pprint(output)
+    if display_only:
+        return
+    if not filename:
+        filename = "botw_rando_gen.txt"
     with open(filename, "w") as f:
         f.write(output)
 
