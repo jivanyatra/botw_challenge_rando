@@ -21,10 +21,11 @@ These objectives take varying amounts of time for each individual, and so one ob
 
 ### To-Do
 
-* Create list of assets
+* ~~Create list of assets~~
   * use SQLite
-* Create the randomizer
+* ~~Create the randomizer~~
 * Add objectives in different tiers
 * Add functionality to select difficulty
 * Package this for reuse
+  * use Click to make this a CLI program with args
 * Create an OBS script ?
