@@ -27,5 +27,6 @@ These objectives take varying amounts of time for each individual, and so one ob
 * Add objectives in different tiers
 * Add functionality to select difficulty
 * Package this for reuse
-  * use Click to make this a CLI program with args
+  * ~~use Click to make this a CLI program with args~~
+  * figure out how to use Rich with click.echo() to output styled text
 * Create an OBS script ?

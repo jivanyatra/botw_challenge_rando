@@ -1,3 +1,4 @@
+import click
 import random
 from pprint import pprint
 
@@ -58,7 +59,7 @@ objectives = ["20 Korok Seeds",
               "Master Sword + Hylian Shield"
               ]
 
-output_template = """
+output_template = """\
 Restrictions:
 Weapons: {weapon}
 Bows: {bow}
@@ -67,10 +68,9 @@ Shields: {shield}
 Objectives:
 Armor: {armor}
 1: {objective1}
-2: {objective2}
-                  """
+2: {objective2}"""
 
-def generate_randomizer_seed(n=2):
+def generate_randomizer_seed(n):
     """
     Takes an integer, n, for number of objectives
     Uses globals/imports to get sets of bows, shields, weapons, armor, and
@@ -95,7 +95,7 @@ def generate_randomizer_seed(n=2):
         seed[f"objective{j}"] = choice
     return seed
 
-def write_to_file(seed={}, *, filename=None, display_only=False):
+def write_to_file(seed={}, *, filename, display_only):
     """
     Takes a dict (from generate_randomizer_seed),
     Writes out to a file (UTF-8 encoding). Optionally, provide
@@ -110,7 +110,7 @@ def write_to_file(seed={}, *, filename=None, display_only=False):
         objective1 = seed["objective1"],
         objective2 = seed["objective2"],
         )
-    pprint(output)
+    click.echo(output)
     if display_only:
         return
     if not filename:
@@ -118,6 +118,16 @@ def write_to_file(seed={}, *, filename=None, display_only=False):
     with open(filename, "w") as f:
         f.write(output)
 
+@click.command()
+@click.option('-o', '--objectives', "num_obj", default=2,
+                 help='number of objectives for seed')
+@click.option('-f', '--filename', "fname", default=None,
+                 help='output filename, default writes to "botw_rando_gen.txt"')
+@click.option('-d', '--display_only', "display_flag", default=False,
+                 help='do not write to file, output on terminal only')
+def botw_rando_gen(num_obj, fname, display_flag):
+    seed = generate_randomizer_seed(num_obj)
+    write_to_file(seed, filename=fname, display_only=display_flag)
+
 if __name__ == "__main__":
-    seed = generate_randomizer_seed()
-    write_to_file(seed)
+    botw_rando_gen()
