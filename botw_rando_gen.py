@@ -1,6 +1,7 @@
 import click
 import random
-from pprint import pprint
+#from pprint import pprint
+#from rich.pretty import pprint
 
 bow_sets = ["Boko",
             "Lizalfos",
@@ -123,7 +124,7 @@ def write_to_file(seed={}, *, filename, display_only):
                  help='number of objectives for seed')
 @click.option('-f', '--filename', "fname", default=None,
                  help='output filename, default writes to "botw_rando_gen.txt"')
-@click.option('-d', '--display_only', "display_flag", default=False,
+@click.option('-d', '--display_only', "display_flag", is_flag=True,
                  help='do not write to file, output on terminal only')
 def botw_rando_gen(num_obj, fname, display_flag):
     seed = generate_randomizer_seed(num_obj)
