@@ -30,3 +30,12 @@ These objectives take varying amounts of time for each individual, and so one ob
   * ~~use Click to make this a CLI program with args~~
   * figure out how to use Rich with click.echo() to output styled text
 * Create an OBS script ?
+
+
+### Resources
+
+[Using Rich and Click together](https://stribny.name/blog/2020/01/building-command-line-interfaces-in-python/)
+
+[Rich documentation](https://rich.readthedocs.io/en/stable/console.html)
+
+[Click documentation](https://click.palletsprojects.com/en/8.0.x/api/#click.echo)
